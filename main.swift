@@ -1,41 +1,61 @@
 
-// ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩  ⇩
-// DO NOT ALTER THE TEXT BETWEEN THESE LINES =========={M{E{R{L{I{N{1}N}I}L}R}E}M}=====================================
-let unsortedIntegers = [5, 1, 4, 2, 8]
-// DO NOT ALTER THE TEXT BETWEEN THESE LINES =========={M{E{R{L{I{N{1}N}I}L}R}E}M}=====================================
-// ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧  ⇧
+ var wordArray = [String]()
 
-// Add your code below:
+let sortedWordArray : [String]
+var word : String
 
-// swaps number in index with the number on its right
-func swap(integers: inout [Int], firstIndex: Int, secondIndex: Int) {
-    let temp = integers[firstIndex]
-    integers[firstIndex] = integers[secondIndex]
-    integers[secondIndex] = temp
+
+func stringGreaterThan(string1: String, string2: String) -> Bool {
+    
+    //filters out anything that isn't a letter to sort only the letters
+    let s1 = string1.lowercased().filter("abcdefghijklmnopqrstuvwxyz".contains)
+    let s2 = string2.lowercased().filter("abcdefghijklmnopqrstuvwxyz".contains)
+    return s1.lowercased() > s2.lowercased()
+}
+
+
+
+// swaps two elements in an array
+func swap(strings: inout [String], firstIndex: Int, secondIndex: Int) {
+    let temp = strings[firstIndex]
+    strings[firstIndex] = strings[secondIndex]
+    strings[secondIndex] = temp
+    
 }
 
 // sorts integers in an array by smallest to largest
-func bubbleSort(unsortedIntegers: [Int]) {
+func bubbleSort(unsortedIntegers: [String]) -> [String]{
     var sortedIntegers = unsortedIntegers
     var swaps = 1
-    var swapTotal = 0
-    var pass = 0
-
-    print("Pass: 0, Swaps: 0/0, Array: \(sortedIntegers)")        
 
     while swaps != 0 {
         swaps = 0
         for element in 0..<sortedIntegers.count - 1 {
-            if sortedIntegers[element] > sortedIntegers[element + 1] {
-                swap(integers: &sortedIntegers, firstIndex: element, secondIndex: element + 1)
+            if stringGreaterThan(string1: sortedIntegers[element], string2: sortedIntegers[element + 1]) {
+//            if sortedIntegers[element] > sortedIntegers[element + 1] {
+                swap(strings: &sortedIntegers, firstIndex: element, secondIndex: element + 1)
                 swaps += 1
-                swapTotal += 1
+
             }
         }
-        print("Pass: \(pass + 1), Swaps: \(swaps)/\(swapTotal), Array: \(sortedIntegers)")
-        pass += 1
     }
 
+    return sortedIntegers
 }
 
-bubbleSort(unsortedIntegers: unsortedIntegers)
+//checks if word is nil, breaks loop if its blank, appends if it isn't
+while let word = readLine() {
+    if word == "" {
+     break
+    } else {
+    wordArray.append(word)
+    }
+}
+
+
+let bub = bubbleSort(unsortedIntegers: wordArray)
+//prints every word in the sortedWordArray on a new line
+for word in bub {
+    print(word)
+    }
+
